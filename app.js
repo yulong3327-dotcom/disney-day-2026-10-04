@@ -127,11 +127,18 @@ document.getElementById("clear-progress").addEventListener("click", () => {
   renderPins(); renderSchedule();
 });
 
+const navigationOrigin = document.getElementById("navigation-origin");
+const navigationReturn = document.getElementById("navigation-return");
+navigationOrigin.addEventListener("input", () => { navigationReturn.disabled = !navigationOrigin.value.trim(); });
 document.getElementById("navigation-form").addEventListener("submit", event => {
   event.preventDefault();
-  const origin = document.getElementById("navigation-origin").value.trim() || "我的位置";
+  const hotel = navigationOrigin.value.trim();
+  const returning = event.submitter?.dataset.direction === "to-hotel";
+  if (returning && !hotel) return;
+  const origin = returning ? "上海迪士尼乐园" : (hotel || "我的位置");
+  const destination = returning ? hotel : "上海迪士尼乐园";
   const mode = document.getElementById("navigation-mode").value;
-  const query = new URLSearchParams({ origin, destination: "上海迪士尼乐园", mode, region: "上海", output: "html", src: "codex.disney-day" });
+  const query = new URLSearchParams({ origin, destination, mode, region: "上海", output: "html", src: "codex.disney-day" });
   window.open(`https://api.map.baidu.com/direction?${query}`, "_blank", "noopener,noreferrer");
 });
 
