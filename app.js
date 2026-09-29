@@ -20,15 +20,32 @@ const evening = [
   { time: "20:40", title: "离园，回酒店取行李", summary: "按人流预留出园和叫车时间；第二天下午去机场，今晚仍需安排住宿。" }
 ];
 
+const legGuidance = [
+  "从明日世界沿北侧主路向东，经过玩具总动员、梦幻世界外围前往疯狂动物城。",
+  "离开疯狂动物城后沿园区东侧向南，进入宝藏湾寻找加勒比海盗入口。",
+  "两站都在宝藏湾，离开加勒比海盗后按巴波萨烧烤的现场标识步行。",
+  "从宝藏湾向西回到奇想花园一侧，按现场巡游路线和演职人员指引选站位。",
+  "看完巡游后从奇想花园向东南走，进入探险岛寻找飞越地平线。",
+  "从探险岛向北经过奇想花园东侧，前往梦幻世界的矿山车区域。",
+  "从梦幻世界向西，经过玩具总动员一侧回到明日世界。",
+  "两站都在明日世界，离开光轮后按星露台餐厅标识步行。",
+  "从明日世界向东南返回奇想花园，在城堡前按现场动线就位。"
+];
+
 const pinContainer = document.getElementById("map-pins");
 const list = document.getElementById("schedule-list");
 const panel = document.getElementById("focus-panel");
 const mapArt = document.getElementById("map-art");
 const mapFrame = document.getElementById("map-frame");
+const parkFromSelect = document.getElementById("park-from");
+const parkToSelect = document.getElementById("park-to");
+const routeOverlay = document.getElementById("map-route");
 const doneKey = "disney-2026-10-04-done";
 let completed = new Set();
 try { completed = new Set(JSON.parse(localStorage.getItem(doneKey) || "[]")); } catch { completed = new Set(); }
 let selected = stops[0].id;
+let parkFromId = stops[0].id;
+let parkToId = stops[1].id;
 let zoom = 1;
 let panX = 0;
 let panY = 0;
@@ -41,13 +58,68 @@ function escapeHtml(s) {
 
 function tagName(type) { return type === "food" ? "用餐" : type === "show" ? "演出" : "项目"; }
 
+function renderParkRoute() {
+  const from = stops.find(stop => stop.id === parkFromId);
+  const to = stops.find(stop => stop.id === parkToId);
+  const fromIndex = stops.indexOf(from);
+  const toIndex = stops.indexOf(to);
+  parkFromSelect.value = parkFromId;
+  parkToSelect.value = parkToId;
+  document.getElementById("park-leg-count").textContent = toIndex === fromIndex + 1 ? `第 ${toIndex} / ${stops.length - 1} 段` : "自选站点";
+  document.getElementById("park-previous").disabled = fromIndex === 0;
+  document.getElementById("park-next").disabled = fromIndex >= stops.length - 2;
+
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const vertical = dy < -8 ? "北" : dy > 8 ? "南" : "";
+  const horizontal = dx < -8 ? "西" : dx > 8 ? "东" : "";
+  const direction = vertical || horizontal ? `大致向${horizontal}${vertical}移动。` : "两站距离较近。";
+  const guidance = from.id === to.id ? "起点与终点相同，请选择另一站。" : toIndex === fromIndex + 1 ? legGuidance[fromIndex] : `${from.area} → ${to.area}，${direction}请按沿途指示寻找可通行步道。`;
+  document.getElementById("park-direction").textContent = guidance;
+
+  if (from.x === to.x && from.y === to.y) {
+    routeOverlay.innerHTML = "";
+    return;
+  }
+  const x1 = from.x * 10, y1 = from.y * 10, x2 = to.x * 10, y2 = to.y * 10;
+  const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+  const arrowX = x1 + (x2 - x1) * .72;
+  const arrowY = y1 + (y2 - y1) * .72;
+  const path = `M ${x1} ${y1} L ${x2} ${y2}`;
+  routeOverlay.innerHTML = `<path class="route-halo" d="${path}"/><path class="route-line" d="${path}"/><path class="route-arrow" d="M -14 -9 L 14 0 L -14 9 Z" transform="translate(${arrowX} ${arrowY}) rotate(${angle})"/><circle class="route-end" cx="${x2}" cy="${y2}" r="12"/>`;
+}
+
+function setParkRoute(fromId, toId, updateSelected = true) {
+  if (!stops.some(stop => stop.id === fromId) || !stops.some(stop => stop.id === toId)) return;
+  parkFromId = fromId;
+  parkToId = toId;
+  if (updateSelected) selected = fromId;
+  zoom = 1;
+  panX = panY = 0;
+  applyTransform();
+  renderParkRoute();
+  renderPins();
+  renderSchedule();
+  renderFocus();
+}
+
+function syncRouteToStop(id) {
+  const index = stops.findIndex(stop => stop.id === id);
+  const fromIndex = Math.min(index, stops.length - 2);
+  parkFromId = stops[fromIndex].id;
+  parkToId = stops[fromIndex + 1].id;
+  renderParkRoute();
+}
+
 function renderPins() {
   pinContainer.innerHTML = stops.filter(stop => stop.id !== "tron-repeat").map(stop => {
     const active = selected === stop.id || (stop.id === "tron" && selected === "tron-repeat");
     const done = completed.has(stop.id) && (stop.id !== "tron" || completed.has("tron-repeat"));
     const label = stop.id === "tron" ? "1·8" : stop.n;
     const accessible = stop.id === "tron" ? "第1站早享创极速光轮，第8站可二刷" : `第${stop.n}站 ${stop.title}，${stop.time}`;
-    return `<button type="button" class="map-pin ${active ? "is-active" : ""} ${done ? "is-complete" : ""}" style="left:${stop.x}%;top:${stop.y}%" data-stop="${stop.id}" data-type="${stop.type}" aria-label="${escapeHtml(accessible)}" title="${escapeHtml(accessible)}">${label}</button>`;
+    const routeStart = stop.id === parkFromId || (stop.id === "tron" && parkFromId === "tron-repeat");
+    const routeEnd = stop.id === parkToId || (stop.id === "tron" && parkToId === "tron-repeat");
+    return `<button type="button" class="map-pin ${active ? "is-active" : ""} ${done ? "is-complete" : ""} ${routeStart ? "is-route-start" : ""} ${routeEnd ? "is-route-end" : ""}" style="left:${stop.x}%;top:${stop.y}%" data-stop="${stop.id}" data-type="${stop.type}" aria-label="${escapeHtml(accessible)}" title="${escapeHtml(accessible)}">${label}</button>`;
   }).join("");
 }
 
@@ -83,6 +155,7 @@ function focusSelectedPin() {
 function selectStop(id, fromSchedule = false) {
   if (!stops.some(s => s.id === id)) return;
   selected = id;
+  syncRouteToStop(id);
   renderPins();
   renderSchedule();
   renderFocus();
@@ -125,6 +198,25 @@ document.getElementById("clear-progress").addEventListener("click", () => {
   completed.clear();
   try { localStorage.removeItem(doneKey); } catch {}
   renderPins(); renderSchedule();
+});
+
+const parkOptions = stops.map(stop => `<option value="${stop.id}">${stop.n}. ${escapeHtml(stop.title)}</option>`).join("");
+parkFromSelect.innerHTML = parkOptions;
+parkToSelect.innerHTML = parkOptions;
+parkFromSelect.addEventListener("change", () => setParkRoute(parkFromSelect.value, parkToSelect.value));
+parkToSelect.addEventListener("change", () => setParkRoute(parkFromSelect.value, parkToSelect.value));
+document.getElementById("park-previous").addEventListener("click", () => {
+  const index = stops.findIndex(stop => stop.id === parkFromId);
+  if (index > 0) setParkRoute(stops[index - 1].id, stops[index].id);
+});
+document.getElementById("park-next").addEventListener("click", () => {
+  const index = stops.findIndex(stop => stop.id === parkFromId);
+  if (index < stops.length - 2) setParkRoute(stops[index + 1].id, stops[index + 2].id);
+});
+document.getElementById("park-navigation").addEventListener("submit", event => {
+  event.preventDefault();
+  setParkRoute(parkFromSelect.value, parkToSelect.value);
+  mapFrame.scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
 const navigationOrigin = document.getElementById("navigation-origin");
@@ -172,6 +264,7 @@ mapFrame.addEventListener("pointerup", endDrag);
 mapFrame.addEventListener("pointercancel", endDrag);
 window.addEventListener("resize", applyTransform);
 
+renderParkRoute();
 renderPins();
 renderSchedule();
 renderFocus();
