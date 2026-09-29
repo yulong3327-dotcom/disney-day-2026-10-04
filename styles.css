@@ -118,6 +118,9 @@ h3 { font-size: 14px; line-height: 1.4; margin: 0 0 8px; }
 .notes-grid article { border-left: 2px solid var(--line); padding-left: 13px; }
 .note-index { display: block; color: var(--coral); font-size: 11px; font-weight: 700; margin-bottom: 9px; font-variant-numeric: tabular-nums; }
 .notes-grid p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 12px; }
+.rules-summary { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 13px; color: var(--text); }
+.rules-summary summary { width: fit-content; cursor: pointer; color: var(--teal); font-size: 12px; font-weight: 700; }
+.rules-summary div { max-width: 980px; padding: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .source-line { margin-top: 23px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.6; }
 .source-line a { text-decoration: none; }
 .source-line a:hover { text-decoration: underline; }
