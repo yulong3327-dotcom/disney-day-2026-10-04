@@ -79,9 +79,16 @@
             <option value="transit">公交</option>
             <option value="walking">步行</option>
           </select>
-          <button type="submit" data-direction="to-park" title="用百度地图规划酒店到上海迪士尼乐园的路线">去乐园 ↗</button>
-          <button type="submit" id="navigation-return" data-direction="to-hotel" title="用百度地图规划乐园回酒店的路线" disabled>回酒店 ↗</button>
+          <button type="submit" data-direction="to-park" title="在下方百度地图查看去乐园的路线">去乐园</button>
+          <button type="submit" id="navigation-return" data-direction="to-hotel" title="在下方百度地图查看回酒店的路线" disabled>回酒店</button>
         </form>
+        <div class="embedded-map">
+          <div class="embedded-map-head">
+            <h3>百度地图 · 乐园周边</h3>
+            <a id="map-fullscreen" href="https://map.baidu.com/?latlng=31.145,121.665&amp;title=%E4%B8%8A%E6%B5%B7%E8%BF%AA%E5%A3%AB%E5%B0%BC%E4%B9%90%E5%9B%AD&amp;content=%E4%B8%8A%E6%B5%B7%E8%BF%AA%E5%A3%AB%E5%B0%BC%E4%B9%90%E5%9B%AD&amp;autoOpen=true&amp;l" target="_blank" rel="noopener noreferrer">全屏查看 ↗</a>
+          </div>
+          <iframe id="baidu-map" title="百度地图：上海迪士尼乐园及周边" src="https://map.baidu.com/?latlng=31.145,121.665&amp;title=%E4%B8%8A%E6%B5%B7%E8%BF%AA%E5%A3%AB%E5%B0%BC%E4%B9%90%E5%9B%AD&amp;content=%E4%B8%8A%E6%B5%B7%E8%BF%AA%E5%A3%AB%E5%B0%BC%E4%B9%90%E5%9B%AD&amp;autoOpen=true&amp;l" loading="lazy" allow="geolocation"></iframe>
+        </div>
         <article class="focus-panel" id="focus-panel" aria-live="polite"></article>
       </section>
 
