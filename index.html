@@ -64,13 +64,27 @@
         <div class="map-frame" id="map-frame" aria-label="上海迪士尼乐园地图，可点选编号标记">
           <div class="map-art" id="map-art">
             <img src="park-map.webp" alt="上海迪士尼乐园官方园区地图，南侧为主入口，西侧为明日世界，北侧为梦幻世界与疯狂动物城，东侧为宝藏湾和探险岛" draggable="false">
+            <svg id="map-route" class="map-route" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg>
             <div id="map-pins"></div>
           </div>
         </div>
         <div class="map-foot">
-          <span>标记表示项目所在区域，具体入口以官方 App 和现场指引为准。</span>
+          <span>标记和连线仅表示大致方位，具体步行通道及入口以官方 App 和现场指引为准。</span>
           <a href="https://static.shanghaidisneyresort.com/web-img-gallery/park-map-260227.pdf" target="_blank" rel="noopener noreferrer">查看官方完整地图 ↗</a>
         </div>
+        <form class="park-navigation" id="park-navigation">
+          <div class="park-navigation-head"><h3>园内站点引导</h3><span id="park-leg-count">第 1 / 9 段</span></div>
+          <div class="park-navigation-fields">
+            <label for="park-from">起点</label><select id="park-from" aria-label="选择园内起点"></select>
+            <label for="park-to">终点</label><select id="park-to" aria-label="选择园内终点"></select>
+          </div>
+          <div class="park-navigation-actions">
+            <button type="button" class="park-step-button" id="park-previous" aria-label="上一段路线" title="上一段路线">‹</button>
+            <button type="button" class="park-step-button" id="park-next" aria-label="下一段路线" title="下一段路线">›</button>
+            <button type="submit" class="park-route-button">显示整段方位</button>
+          </div>
+          <p class="park-direction" id="park-direction" aria-live="polite"></p>
+        </form>
         <form class="navigation-bar" id="navigation-form">
           <label for="navigation-origin">百度地图 · 酒店往返</label>
           <input id="navigation-origin" name="origin" type="text" placeholder="输入酒店名称，或留空用当前位置" autocomplete="off">
