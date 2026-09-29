@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f5">
+  <title>10月4日上海迪士尼双人游园路线</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">D</span><span>上海迪士尼 · 游园路线</span></div>
+      <nav class="toplinks" aria-label="页面导航">
+        <a href="#route">路线地图</a>
+        <a href="#schedule">时间安排</a>
+        <a href="#notes">出行提醒</a>
+      </nav>
+      <a class="official-link" href="https://www.shanghaidisneyresort.com/zh-cn/park-calendar" target="_blank" rel="noopener noreferrer">官方时间表 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">2026年10月4日 · 周日 · 2人</p>
+        <h1 id="page-title">早享先冲创极速光轮</h1>
+        <p class="intro-copy">四个必刷优先：早享光轮、开园后热力追踪、加勒比海盗和飞跃地平线。中午看花车，下午视排队插入矿山车与光轮二刷。</p>
+      </div>
+      <div class="day-facts" aria-label="当日关键时间">
+        <div><span>起床</span><strong>05:30</strong></div>
+        <div><span>早享最早</span><strong>07:30</strong></div>
+        <div><span>花车</span><strong>12:15</strong></div>
+        <div><span>夜间演出</span><strong>20:00</strong></div>
+      </div>
+    </section>
+
+    <div class="status-line">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>官方当前显示：乐园 08:30–21:30；花车 12:15 / 15:45；夜间演出 20:00 / 21:15</span>
+      <span class="status-date">9月29日核对 · 出发前再查</span>
+    </div>
+
+    <div class="mobile-view-switch" role="tablist" aria-label="查看方式">
+      <button type="button" role="tab" id="map-tab" aria-controls="route" aria-selected="true" class="is-selected" data-view="map">地图</button>
+      <button type="button" role="tab" id="schedule-tab" aria-controls="schedule" aria-selected="false" data-view="schedule">时间线</button>
+    </div>
+
+    <div class="workspace">
+      <section class="map-section" id="route" aria-labelledby="map-title" role="tabpanel">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">园区路线</p>
+            <h2 id="map-title">按顺序点地图查看安排</h2>
+          </div>
+          <div class="map-actions">
+            <button type="button" class="icon-button" id="zoom-out" aria-label="缩小地图" title="缩小地图">−</button>
+            <button type="button" class="icon-button" id="zoom-in" aria-label="放大地图" title="放大地图">+</button>
+            <button type="button" class="icon-button reset-button" id="zoom-reset" aria-label="重置地图视角" title="重置地图视角">⌖</button>
+          </div>
+        </div>
+
+        <div class="map-frame" id="map-frame" aria-label="上海迪士尼乐园地图，可点选编号标记">
+          <div class="map-art" id="map-art">
+            <img src="park-map.webp" alt="上海迪士尼乐园官方园区地图，南侧为主入口，西侧为明日世界，北侧为梦幻世界与疯狂动物城，东侧为宝藏湾和探险岛" draggable="false">
+            <div id="map-pins"></div>
+          </div>
+        </div>
+        <div class="map-foot">
+          <span>标记表示项目所在区域，具体入口以官方 App 和现场指引为准。</span>
+          <a href="https://static.shanghaidisneyresort.com/web-img-gallery/park-map-260227.pdf" target="_blank" rel="noopener noreferrer">查看官方完整地图 ↗</a>
+        </div>
+        <form class="navigation-bar" id="navigation-form">
+          <label for="navigation-origin">酒店去乐园</label>
+          <input id="navigation-origin" name="origin" type="text" placeholder="输入酒店名称，或留空用当前位置" autocomplete="off">
+          <select id="navigation-mode" name="mode" aria-label="导航方式">
+            <option value="driving">驾车</option>
+            <option value="transit">公交</option>
+            <option value="walking">步行</option>
+          </select>
+          <button type="submit" title="用百度地图规划酒店到上海迪士尼乐园的路线">百度地图导航 ↗</button>
+        </form>
+        <article class="focus-panel" id="focus-panel" aria-live="polite"></article>
+      </section>
+
+      <section class="schedule-section" id="schedule" aria-labelledby="schedule-title" role="tabpanel">
+        <div class="section-head schedule-head">
+          <div>
+            <p class="section-kicker">当日时间线</p>
+            <h2 id="schedule-title">从早享到夜间演出</h2>
+          </div>
+          <div class="progress-wrap" aria-live="polite"><span id="progress-text">0 / 10 站</span><button type="button" id="clear-progress" title="重置已完成的项目">重置</button></div>
+        </div>
+        <div class="phase-line"><span>出发</span><span>四个必刷</span><span>中午花车</span><span>夜间</span></div>
+        <div class="schedule-list" id="schedule-list"></div>
+      </section>
+    </div>
+
+    <section class="notes" id="notes" aria-labelledby="notes-title">
+      <div class="notes-head"><p class="section-kicker">行前与现场</p><h2 id="notes-title">当天只需记住这些</h2></div>
+      <div class="notes-grid">
+        <article><span class="note-index">01</span><h3>酒店与出发</h3><p>05:30 起床，约 06:10 退房并寄存行李，目标 07:00 到主入口。若 4 日晚还住原酒店，无需退房。次日下午才去机场，记得安排 4 日晚住宿。</p></article>
+        <article><span class="note-index">02</span><h3>早享限制</h3><p>两人各持门票和早享卡，带购票使用的身份证原件；早享二维码须在官方 App 或小程序实时出示。早享不开放疯狂动物城。</p></article>
+        <article><span class="note-index">03</span><h3>用餐预算</h3><p>午餐可在巴波萨烧烤点菌菇面 89 元加鸡腿饭 109 元。晚餐就近选星露台，两份主食约 198–218 元。菜单和价格以当天为准。</p></article>
+        <article><span class="note-index">04</span><h3>排队原则</h3><p>项目时间是目标，不是预约。四个必刷优先于矿山车和光轮二刷。百度地图用于酒店往返乐园，园内以这张地图、官方 App 和现场指引为准。</p></article>
+      </div>
+      <div class="source-line">依据：<a href="https://www.shanghaidisneyresort.com/zh-cn/park-calendar" target="_blank" rel="noopener noreferrer">运营与演出时间</a> · <a href="https://www.shanghaidisneyresort.com/zh-cn/experience/tour/early-access" target="_blank" rel="noopener noreferrer">早享卡规则</a> · <a href="https://www.shanghaidisneyresort.com/zh-cn/legal/park-rules/" target="_blank" rel="noopener noreferrer">游客须知</a>。营业、演出和项目可能临时调整。</div>
+    </section>
+  </main>
+</body>
+</html>
