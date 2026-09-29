@@ -1,14 +1,13 @@
 const stops = [
-  { id: "tron", n: 1, time: "07:30", until: "08:05", title: "创极速光轮", area: "明日世界", type: "ride", priority: "must", x: 18.5, y: 34, summary: "早享第一站 · 必刷", detail: "从早享入口直奔明日世界，先玩创极速光轮。进队列前按现场要求寄存随身物品。", fallback: "当天暂未开放时，直接向动物城入口移动；下午再回明日世界补刷。" },
-  { id: "zootopia", n: 2, time: "08:35", until: "10:00", title: "疯狂动物城：热力追踪", area: "疯狂动物城", type: "ride", priority: "must", x: 72, y: 12, summary: "开园后入区 · 必刷", detail: "08:05 起从明日世界向动物城移动。早享不包含提前进入动物城；正式开放后先排热力追踪，再在街区拍照。", fallback: "若队列异常长，记录实时等候并改为下午补刷，先保住 12:15 巡游。" },
-  { id: "pirates", n: 3, time: "10:00", until: "10:45", title: "加勒比海盗：沉落宝藏之战", area: "宝藏湾", type: "ride", priority: "must", x: 85, y: 44, summary: "沿东侧向南 · 必刷", detail: "从动物城沿东侧进入宝藏湾，先玩加勒比海盗，随后在同一区域吃午饭。", fallback: "如排队超过 50 分钟，先吃午饭，巡游后再查等候；不要错过中午场。" },
-  { id: "lunch", n: 4, time: "10:45", until: "11:25", title: "巴波萨烧烤午餐", area: "宝藏湾", type: "food", x: 87, y: 34.5, summary: "两人主餐参考约 198 元", detail: "近期官方菜单：卤豆腐脆葱菌菇面 89 元、香烤鸡腿菌菇黑米饭 109 元。尽量 11:25 前用完餐。", fallback: "若加勒比海盗排队耽误，改吃更快的近处简餐，演出结束后再补正餐。" },
-  { id: "parade", n: 5, time: "11:45", until: "12:50", title: "12:15 花车巡游", area: "巡游路线", type: "show", x: 52, y: 53, summary: "11:45 到巡游路线 · 中午场", detail: "11:25 从宝藏湾往奇想花园一侧走，11:45 到巡游路线找位置。12:15 为官网公布的开场时间，花车经过你们站位可能更晚。", fallback: "官网目前另一场是 15:45，并非夜间；若中午场调整，按当天 App 改走下午场。" },
-  { id: "soaring", n: 6, time: "13:00", until: "14:40", title: "翱翔·飞越地平线", area: "探险岛", type: "ride", priority: "must", x: 78.5, y: 68, summary: "巡游后向东南走 · 必刷", detail: "巡游后穿过奇想花园前往探险岛。先看官方 App 实时等候，时间窗已留较多排队缓冲。", fallback: "若等候超过 90 分钟，先玩附近短队项目并在 17:30 复查，四个必刷优先于二刷和矿山车。" },
-  { id: "mine", n: 7, time: "14:50", until: "15:40", title: "七个小矮人矿山车", area: "梦幻世界", type: "ride", priority: "optional", x: 69, y: 24, summary: "机动项目 · 排队短才玩", detail: "从探险岛向梦幻世界移动；仅在预计 15:40 前能玩完时排队。否则逛梦幻世界、拍照并向明日世界前进。", fallback: "排队长就跳过，不挤占四个必刷项目或光轮二刷时间。" },
-  { id: "tron-repeat", n: 8, time: "15:50", until: "16:50", title: "二刷创极速光轮", area: "明日世界", type: "ride", priority: "optional", x: 22, y: 38, summary: "很期待就二刷 · 以排队为准", detail: "从梦幻世界向明日世界移动。若前面四个必刷都已完成，且队列可接受，抓住二刷机会。", fallback: "若飞跃地平线或热力追踪尚未完成，二刷时段优先拿去补必刷。" },
-  { id: "dinner", n: 9, time: "17:00", until: "17:40", title: "星露台餐厅晚餐", area: "明日世界", type: "food", x: 29.5, y: 46, summary: "两份主食参考约 198–218 元", detail: "就近吃晚餐。近期官方菜单：牛油果素汉堡 99 元，麻辣鸡肉汉堡或咖喱猪排饭 109 元。", fallback: "若前面项目拖时，晚餐可就近简化；当天菜品与价格以现场为准。" },
-  { id: "night", n: 10, time: "19:10", until: "20:40", title: "20:00 城堡夜间演出", area: "奇想花园", type: "show", x: 46, y: 36, summary: "17:40–19:10 补漏与合照 · 19:10 就位", detail: "晚餐后留出补刷和合照时间，再回城堡区域。19:10 前后找观看位置，演出结束后预留疏散时间。", fallback: "可改看 21:15 场，但离园和取行李会更晚；演出可能因天气调整。" }
+  { id: "tron", n: 1, time: "07:30", until: "08:05", title: "创极速光轮", area: "明日世界", type: "ride", priority: "must", x: 18.5, y: 34, summary: "早享第一站 · 必刷", detail: "从早享入口直奔明日世界，先玩创极速光轮。若首刷结束早、二刷排队仅约 10–15 分钟，可就地二刷；最迟 08:05 离开，赶往动物城。", fallback: "未开放或二刷排队长，就向动物城移动，不为二刷横穿园区。" },
+  { id: "zootopia", n: 2, time: "08:35", until: "09:50", title: "疯狂动物城：热力追踪", area: "疯狂动物城", type: "ride", priority: "must", x: 72, y: 12, summary: "正式开园后入区 · 必刷", detail: "沿园区北侧向东到动物城。早享不包含提前进入动物城；正式开放后先排热力追踪，再视时间拍照。", fallback: "若排队耗时过长，矿山车直接跳过；中午巡游前留在梦幻世界东侧。" },
+  { id: "mine", n: 3, time: "10:00", until: "11:20", title: "七个小矮人矿山车", area: "梦幻世界", type: "ride", priority: "optional", x: 69, y: 24, summary: "看实时等候 · 可一键跳过", detail: "离开动物城后到相邻的矿山车。仅在预计 11:20 前能结束时排队；若跳过，可在梦幻世界东侧拍照、吃自带小食或玩附近短队项目。", fallback: "排队长就跳过，直接去梦幻世界东侧巡游沿线，避免为可选项目误了中午场。" },
+  { id: "parade", n: 4, time: "11:45", until: "12:50", title: "12:15 花车巡游", area: "梦幻世界东侧", type: "show", x: 62, y: 36, summary: "宝藏湾入口附近的巡游沿线 · 中午场", detail: "从矿山车向南到梦幻世界东侧、宝藏湾入口附近的官方巡游沿线。11:45 前后按演职人员指引找允许的站位；12:15 是开场时间，花车到此可能更晚。", fallback: "以当天官方 App、巡游路线和现场指引为准；若此段不开放，选同一侧最近的观演位置。" },
+  { id: "lunch", n: 5, time: "13:00", until: "13:40", title: "巴波萨烧烤午餐", area: "宝藏湾", type: "food", x: 87, y: 34.5, summary: "两人主餐参考约 198 元", detail: "看完花车向东进入宝藏湾，先在巴波萨烧烤用餐，再向南前往加勒比海盗。早餐与午餐间较久，上午可带合规小食补给。近期官方菜单：卤豆腐脆葱菌菇面 89 元、香烤鸡腿菌菇黑米饭 109 元。", fallback: "若花车经过较晚或餐厅等候较长，选宝藏湾附近营业中的简餐；菜单和价格以现场为准。" },
+  { id: "pirates", n: 6, time: "13:45", until: "14:45", title: "加勒比海盗：沉落宝藏之战", area: "宝藏湾", type: "ride", priority: "must", x: 85, y: 44, summary: "午餐后向南 · 必刷", detail: "从巴波萨烧烤继续向南走到加勒比海盗，不再回到梦幻世界。排队耗时按当天实时等候调整。", fallback: "若等候过长，优先保证加勒比海盗和飞越地平线两个必刷，取消附近机动项目。" },
+  { id: "soaring", n: 7, time: "15:00", until: "16:45", title: "翱翔·飞越地平线", area: "探险岛", type: "ride", priority: "must", x: 78.5, y: 68, summary: "从宝藏湾向南到探险岛 · 必刷", detail: "离开加勒比海盗后沿园区东侧向南去探险岛。先看实时等候，下午时间窗留作排队缓冲。", fallback: "若队列异常长，晚餐顺延并留在探险岛附近稍晚复查，不为其他项目横穿园区。" },
+  { id: "dinner", n: 8, time: "17:00", until: "17:45", title: "部落丰盛堂晚餐", area: "探险岛", type: "food", x: 66, y: 58, summary: "飞越地平线后就近吃", detail: "飞越地平线后往探险岛西侧走，晚餐选择部落丰盛堂；营业与价格以当天官方 App 或现场为准。", fallback: "若部落丰盛堂未营业，沿返回城堡方向选择营业中的餐厅。" },
+  { id: "night", n: 9, time: "19:10", until: "20:40", title: "20:00 城堡夜间演出", area: "奇想花园", type: "show", x: 46, y: 43, summary: "17:45–19:10 合照与休息 · 19:10 就位", detail: "晚餐后沿奇想花园方向回到城堡南侧的现场开放观演区。19:10 前后找观看位置，演出结束后预留疏散时间。", fallback: "可改看 21:15 场，但离园和取行李会更晚；演出可能因天气调整。" }
 ];
 
 const morning = [
@@ -22,14 +21,13 @@ const evening = [
 
 const legGuidance = [
   "从明日世界沿北侧主路向东，经过玩具总动员、梦幻世界外围前往疯狂动物城。",
-  "离开疯狂动物城后沿园区东侧向南，进入宝藏湾寻找加勒比海盗入口。",
-  "两站都在宝藏湾，离开加勒比海盗后按巴波萨烧烤的现场标识步行。",
-  "从宝藏湾向西回到奇想花园一侧，按现场巡游路线和演职人员指引选站位。",
-  "看完巡游后从奇想花园向东南走，进入探险岛寻找飞越地平线。",
-  "从探险岛向北经过奇想花园东侧，前往梦幻世界的矿山车区域。",
-  "从梦幻世界向西，经过玩具总动员一侧回到明日世界。",
-  "两站都在明日世界，离开光轮后按星露台餐厅标识步行。",
-  "从明日世界向东南返回奇想花园，在城堡前按现场动线就位。"
+  "离开动物城向南到相邻的矿山车；若等候过长，沿梦幻世界东侧直接去看巡游。",
+  "从矿山车向南到梦幻世界东侧、宝藏湾入口附近的官方巡游沿线。",
+  "巡游结束后向东进入宝藏湾，按巴波萨烧烤现场标识用餐。",
+  "午餐后继续向南，前往同在宝藏湾的加勒比海盗入口。",
+  "加勒比海盗结束后沿东侧向南进入探险岛，寻找飞越地平线。",
+  "飞越地平线后往探险岛西侧走，按部落丰盛堂现场标识前往晚餐。",
+  "晚餐后从探险岛向西北返回奇想花园，在城堡前按现场动线就位。"
 ];
 
 const pinContainer = document.getElementById("map-pins");
@@ -43,6 +41,8 @@ const routeOverlay = document.getElementById("map-route");
 const doneKey = "disney-2026-10-04-done";
 let completed = new Set();
 try { completed = new Set(JSON.parse(localStorage.getItem(doneKey) || "[]")); } catch { completed = new Set(); }
+completed = new Set([...completed].filter(id => stops.some(stop => stop.id === id)));
+const skippedOptional = new Set();
 let selected = stops[0].id;
 let parkFromId = stops[0].id;
 let parkToId = stops[1].id;
@@ -58,6 +58,27 @@ function escapeHtml(s) {
 
 function tagName(type) { return type === "food" ? "用餐" : type === "show" ? "演出" : "项目"; }
 
+function nextStopAfter(id) {
+  const index = stops.findIndex(stop => stop.id === id);
+  return stops.slice(index + 1).find(stop => !skippedOptional.has(stop.id));
+}
+
+function previousStopBefore(id) {
+  const index = stops.findIndex(stop => stop.id === id);
+  return stops.slice(0, index).reverse().find(stop => !skippedOptional.has(stop.id));
+}
+
+function renderNextStop() {
+  const next = nextStopAfter(selected);
+  const name = document.getElementById("next-stop-name");
+  const button = document.getElementById("go-next-stop");
+  const skip = document.getElementById("skip-optional");
+  name.textContent = next ? `${next.time} · ${next.title}` : "行程结束 · 离园取行李";
+  name.title = next ? next.title : "";
+  button.disabled = !next;
+  skip.hidden = !next || next.priority !== "optional";
+}
+
 function renderParkRoute() {
   const from = stops.find(stop => stop.id === parkFromId);
   const to = stops.find(stop => stop.id === parkToId);
@@ -66,15 +87,15 @@ function renderParkRoute() {
   parkFromSelect.value = parkFromId;
   parkToSelect.value = parkToId;
   document.getElementById("park-leg-count").textContent = toIndex === fromIndex + 1 ? `第 ${toIndex} / ${stops.length - 1} 段` : "自选站点";
-  document.getElementById("park-previous").disabled = fromIndex === 0;
-  document.getElementById("park-next").disabled = fromIndex >= stops.length - 2;
+  document.getElementById("park-previous").disabled = !previousStopBefore(from.id);
+  document.getElementById("park-next").disabled = !nextStopAfter(to.id);
 
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const vertical = dy < -8 ? "北" : dy > 8 ? "南" : "";
   const horizontal = dx < -8 ? "西" : dx > 8 ? "东" : "";
   const direction = vertical || horizontal ? `大致向${horizontal}${vertical}移动。` : "两站距离较近。";
-  const guidance = from.id === to.id ? "起点与终点相同，请选择另一站。" : toIndex === fromIndex + 1 ? legGuidance[fromIndex] : `${from.area} → ${to.area}，${direction}请按沿途指示寻找可通行步道。`;
+  const guidance = from.id === to.id ? "起点与终点相同，请选择另一站。" : from.id === "zootopia" && to.id === "parade" ? "跳过矿山车后，从动物城向南到梦幻世界东侧的官方巡游沿线。" : toIndex === fromIndex + 1 ? legGuidance[fromIndex] : `${from.area} → ${to.area}，${direction}请按沿途指示寻找可通行步道。`;
   document.getElementById("park-direction").textContent = guidance;
 
   if (from.x === to.x && from.y === to.y) {
@@ -93,7 +114,10 @@ function setParkRoute(fromId, toId, updateSelected = true) {
   if (!stops.some(stop => stop.id === fromId) || !stops.some(stop => stop.id === toId)) return;
   parkFromId = fromId;
   parkToId = toId;
-  if (updateSelected) selected = fromId;
+  if (updateSelected) {
+    selected = fromId;
+    skippedOptional.delete(fromId);
+  }
   zoom = 1;
   panX = panY = 0;
   applyTransform();
@@ -105,27 +129,26 @@ function setParkRoute(fromId, toId, updateSelected = true) {
 
 function syncRouteToStop(id) {
   const index = stops.findIndex(stop => stop.id === id);
-  const fromIndex = Math.min(index, stops.length - 2);
-  parkFromId = stops[fromIndex].id;
-  parkToId = stops[fromIndex + 1].id;
+  if (index === stops.length - 1) {
+    parkFromId = stops[index - 1].id;
+    parkToId = id;
+  } else {
+    parkFromId = id;
+    parkToId = nextStopAfter(id).id;
+  }
   renderParkRoute();
 }
 
 function renderPins() {
-  pinContainer.innerHTML = stops.filter(stop => stop.id !== "tron-repeat").map(stop => {
-    const active = selected === stop.id || (stop.id === "tron" && selected === "tron-repeat");
-    const done = completed.has(stop.id) && (stop.id !== "tron" || completed.has("tron-repeat"));
-    const label = stop.id === "tron" ? "1·8" : stop.n;
-    const accessible = stop.id === "tron" ? "第1站早享创极速光轮，第8站可二刷" : `第${stop.n}站 ${stop.title}，${stop.time}`;
-    const routeStart = stop.id === parkFromId || (stop.id === "tron" && parkFromId === "tron-repeat");
-    const routeEnd = stop.id === parkToId || (stop.id === "tron" && parkToId === "tron-repeat");
-    return `<button type="button" class="map-pin ${active ? "is-active" : ""} ${done ? "is-complete" : ""} ${routeStart ? "is-route-start" : ""} ${routeEnd ? "is-route-end" : ""}" style="left:${stop.x}%;top:${stop.y}%" data-stop="${stop.id}" data-type="${stop.type}" aria-label="${escapeHtml(accessible)}" title="${escapeHtml(accessible)}">${label}</button>`;
+  pinContainer.innerHTML = stops.map(stop => {
+    const accessible = `第${stop.n}站 ${stop.title}，${stop.time}`;
+    return `<button type="button" class="map-pin ${selected === stop.id ? "is-active" : ""} ${completed.has(stop.id) ? "is-complete" : ""} ${stop.id === parkFromId ? "is-route-start" : ""} ${stop.id === parkToId ? "is-route-end" : ""}" style="left:${stop.x}%;top:${stop.y}%" data-stop="${stop.id}" data-type="${stop.type}" aria-label="${escapeHtml(accessible)}" title="${escapeHtml(accessible)}">${stop.n}</button>`;
   }).join("");
 }
 
 function renderSchedule() {
   const prep = morning.map(step => `<div class="schedule-item prep"><span class="time">${step.time}</span><div class="item-main"><div class="item-select static"><span class="item-title">${step.title}<span class="item-area">出发</span></span><span class="item-summary">${step.summary}</span></div></div></div>`).join("");
-  const itinerary = stops.map(stop => `<div class="schedule-item ${selected === stop.id ? "is-active" : ""} ${completed.has(stop.id) ? "is-complete" : ""}" data-row="${stop.id}"><span class="time">${stop.time}</span><div class="item-main"><button type="button" class="item-select" data-select="${stop.id}" aria-label="查看${escapeHtml(stop.title)}的地图位置"><span class="item-title">${escapeHtml(stop.title)}<span class="item-area">${escapeHtml(stop.area)}</span></span><span class="item-summary">${escapeHtml(stop.summary)}</span></button><button type="button" class="complete-button" data-complete="${stop.id}" aria-label="${completed.has(stop.id) ? "标记未完成" : "标记已完成"}：${escapeHtml(stop.title)}" aria-pressed="${completed.has(stop.id)}" title="${completed.has(stop.id) ? "标记未完成" : "标记已完成"}">${completed.has(stop.id) ? "✓" : "○"}</button></div></div>`).join("");
+  const itinerary = stops.map(stop => `<div class="schedule-item ${selected === stop.id ? "is-active" : ""} ${completed.has(stop.id) ? "is-complete" : ""} ${skippedOptional.has(stop.id) ? "is-skipped" : ""}" data-row="${stop.id}"><span class="time">${stop.time}</span><div class="item-main"><button type="button" class="item-select" data-select="${stop.id}" aria-label="查看${escapeHtml(stop.title)}的地图位置"><span class="item-title">${escapeHtml(stop.title)}<span class="item-area">${escapeHtml(stop.area)}</span></span><span class="item-summary">${skippedOptional.has(stop.id) ? "已跳过 · " : ""}${escapeHtml(stop.summary)}</span></button><button type="button" class="complete-button" data-complete="${stop.id}" aria-label="${completed.has(stop.id) ? "标记未完成" : "标记已完成"}：${escapeHtml(stop.title)}" aria-pressed="${completed.has(stop.id)}" title="${completed.has(stop.id) ? "标记未完成" : "标记已完成"}">${completed.has(stop.id) ? "✓" : "○"}</button></div></div>`).join("");
   const finish = evening.map(step => `<div class="schedule-item prep"><span class="time">${step.time}</span><div class="item-main"><div class="item-select static"><span class="item-title">${step.title}<span class="item-area">收尾</span></span><span class="item-summary">${step.summary}</span></div></div></div>`).join("");
   list.innerHTML = prep + itinerary + finish;
   document.getElementById("progress-text").textContent = `${completed.size} / ${stops.length} 站`;
@@ -134,6 +157,7 @@ function renderSchedule() {
 function renderFocus() {
   const stop = stops.find(s => s.id === selected);
   panel.innerHTML = `<div class="focus-top"><span class="focus-time">第 ${stop.n} 站 · ${stop.time}–${stop.until}</span><span class="tag ${stop.type}">${tagName(stop.type)}</span>${stop.priority ? `<span class="tag ${stop.priority}">${stop.priority === "must" ? "必刷" : "机动"}</span>` : ""}<span class="tag">${escapeHtml(stop.area)}</span></div><h3>${escapeHtml(stop.title)}</h3><p>${escapeHtml(stop.detail)}</p><div class="focus-fallback"><strong>现场调整：</strong>${escapeHtml(stop.fallback)}</div>`;
+  renderNextStop();
 }
 
 function applyTransform() {
@@ -155,6 +179,7 @@ function focusSelectedPin() {
 function selectStop(id, fromSchedule = false) {
   if (!stops.some(s => s.id === id)) return;
   selected = id;
+  skippedOptional.delete(id);
   syncRouteToStop(id);
   renderPins();
   renderSchedule();
@@ -178,7 +203,34 @@ function setView(view) {
 
 pinContainer.addEventListener("click", event => {
   const button = event.target.closest("[data-stop]");
-  if (button && !ignoreClick) selectStop(button.dataset.stop === "tron" && selected === "tron" ? "tron-repeat" : button.dataset.stop);
+  if (button && !ignoreClick) selectStop(button.dataset.stop);
+});
+
+document.getElementById("go-next-stop").addEventListener("click", () => {
+  const next = nextStopAfter(selected);
+  if (!next) return;
+  parkFromId = selected;
+  parkToId = next.id;
+  selected = next.id;
+  zoom = 1;
+  panX = panY = 0;
+  applyTransform();
+  renderParkRoute();
+  renderPins();
+  renderSchedule();
+  renderFocus();
+  if (matchMedia("(max-width: 760px)").matches) setView("map");
+  mapFrame.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("skip-optional").addEventListener("click", () => {
+  const next = nextStopAfter(selected);
+  if (!next || next.priority !== "optional") return;
+  skippedOptional.add(next.id);
+  syncRouteToStop(selected);
+  renderPins();
+  renderSchedule();
+  renderNextStop();
 });
 
 list.addEventListener("click", event => {
@@ -206,12 +258,12 @@ parkToSelect.innerHTML = parkOptions;
 parkFromSelect.addEventListener("change", () => setParkRoute(parkFromSelect.value, parkToSelect.value));
 parkToSelect.addEventListener("change", () => setParkRoute(parkFromSelect.value, parkToSelect.value));
 document.getElementById("park-previous").addEventListener("click", () => {
-  const index = stops.findIndex(stop => stop.id === parkFromId);
-  if (index > 0) setParkRoute(stops[index - 1].id, stops[index].id);
+  const previous = previousStopBefore(parkFromId);
+  if (previous) setParkRoute(previous.id, parkFromId);
 });
 document.getElementById("park-next").addEventListener("click", () => {
-  const index = stops.findIndex(stop => stop.id === parkFromId);
-  if (index < stops.length - 2) setParkRoute(stops[index + 1].id, stops[index + 2].id);
+  const next = nextStopAfter(parkToId);
+  if (next) setParkRoute(parkToId, next.id);
 });
 document.getElementById("park-navigation").addEventListener("submit", event => {
   event.preventDefault();
