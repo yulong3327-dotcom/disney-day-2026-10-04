@@ -138,8 +138,12 @@ document.getElementById("navigation-form").addEventListener("submit", event => {
   const origin = returning ? "上海迪士尼乐园" : (hotel || "我的位置");
   const destination = returning ? hotel : "上海迪士尼乐园";
   const mode = document.getElementById("navigation-mode").value;
-  const query = new URLSearchParams({ origin, destination, mode, region: "上海", output: "html", src: "codex.disney-day" });
-  window.open(`https://api.map.baidu.com/direction?${query}`, "_blank", "noopener,noreferrer");
+  const baiduMode = { driving: "nav", transit: "bt", walking: "walk" }[mode];
+  const route = `${baiduMode}&sn=2$$$$$$${origin}$$$$$$&en=2$$$$$$${destination}$$$$$$&sc=289&ec=289${mode === "transit" ? "&c=289" : ""}`;
+  const url = `https://map.baidu.com/?l=&s=${encodeURIComponent(route)}`;
+  document.getElementById("baidu-map").src = url;
+  document.getElementById("map-fullscreen").href = url;
+  document.querySelector(".embedded-map").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 document.querySelectorAll(".mobile-view-switch button").forEach(button => button.addEventListener("click", () => setView(button.dataset.view)));
