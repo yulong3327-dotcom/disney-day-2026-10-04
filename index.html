@@ -72,14 +72,15 @@
           <a href="https://static.shanghaidisneyresort.com/web-img-gallery/park-map-260227.pdf" target="_blank" rel="noopener noreferrer">查看官方完整地图 ↗</a>
         </div>
         <form class="navigation-bar" id="navigation-form">
-          <label for="navigation-origin">酒店去乐园</label>
+          <label for="navigation-origin">百度地图 · 酒店往返</label>
           <input id="navigation-origin" name="origin" type="text" placeholder="输入酒店名称，或留空用当前位置" autocomplete="off">
           <select id="navigation-mode" name="mode" aria-label="导航方式">
             <option value="driving">驾车</option>
             <option value="transit">公交</option>
             <option value="walking">步行</option>
           </select>
-          <button type="submit" title="用百度地图规划酒店到上海迪士尼乐园的路线">百度地图导航 ↗</button>
+          <button type="submit" data-direction="to-park" title="用百度地图规划酒店到上海迪士尼乐园的路线">去乐园 ↗</button>
+          <button type="submit" id="navigation-return" data-direction="to-hotel" title="用百度地图规划乐园回酒店的路线" disabled>回酒店 ↗</button>
         </form>
         <article class="focus-panel" id="focus-panel" aria-live="polite"></article>
       </section>
